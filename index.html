@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - Versión Final</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Catálogo de Herramientas - Equipamiento Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,331 +13,1064 @@
         }
 
         :root {
-            --bg: #fafaf9;
-            --text: #1c1917;
-            --accent: #0a0a0a;
-            --border: #e7e5e4;
-            --card: #ffffff;
+            --orange: #ff6b00;
+            --dark-orange: #e65100;
+            --yellow: #ffc107;
+            --dark-gray: #212121;
+            --medium-gray: #424242;
+            --light-gray: #757575;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --black: #000000;
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background: var(--bg);
-            color: var(--text);
+            color: var(--dark-gray);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--dark-gray);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            padding: 0;
         }
 
-        header {
+        .nav-top {
+            background: var(--orange);
+            padding: 8px 0;
             text-align: center;
-            margin-bottom: 80px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            letter-spacing: 4px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--orange);
             text-transform: uppercase;
-            color: #78716c;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '⚙';
+            font-size: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        /* HERO CAROUSEL */
+        .hero {
+            margin-top: 121px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--medium-gray) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,107,0,0.03) 10px,
+                rgba(255,107,0,0.03) 20px
+            );
+            pointer-events: none;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeIn 0.8s ease;
+            color: white;
+            position: relative;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tool-badge {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             margin-bottom: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
         }
 
-        h1 {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
+        .carousel-slide h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
         }
 
-        .subtitle {
-            font-size: 16px;
-            color: #78716c;
-            font-weight: 300;
+        .carousel-slide p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+        .carousel-price {
+            display: inline-block;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--yellow);
+            margin-top: 10px;
+            padding: 15px 40px;
+            background: rgba(0,0,0,0.3);
+            border: 3px solid var(--yellow);
+            transform: skew(-5deg);
+        }
+
+        .carousel-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .carousel-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+
+        .carousel-dot.active {
+            background: var(--orange);
+            width: 40px;
+            border-color: var(--orange);
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--orange);
+            border: none;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 28px;
+            color: white;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            font-weight: bold;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--yellow);
+            color: var(--dark-gray);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev {
+            left: 40px;
+        }
+
+        .carousel-arrow.next {
+            right: 40px;
+        }
+
+        /* SECTIONS */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .section-header {
+            text-align: center;
             margin-bottom: 80px;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: '⚒';
+            font-size: 40px;
+            display: block;
+            margin-bottom: 20px;
+            color: var(--orange);
+        }
+
+        .section-header h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dark-gray);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--light-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: var(--orange);
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+        }
+
+        .divider::before {
+            left: -15px;
+        }
+
+        .divider::after {
+            right: -15px;
+        }
+
+        /* PRODUCTS GRID */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .product-card {
-            background: var(--card);
-            border: 1px solid var(--border);
+            background: var(--white);
+            border: 2px solid #e0e0e0;
             overflow: hidden;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--orange), var(--yellow));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: var(--orange);
         }
 
         .product-image {
             width: 100%;
-            height: 240px;
-            background: linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 100%);
+            height: 280px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
+            position: relative;
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background: var(--orange);
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            opacity: 0.1;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
         }
 
-        .product-image-placeholder {
-            font-size: 60px;
-            opacity: 0.3;
+        .product-card:hover .product-image img {
+            transform: scale(1.15);
+        }
+
+        .product-placeholder {
+            font-size: 90px;
+            opacity: 0.15;
+            filter: grayscale(1);
         }
 
         .product-info {
-            padding: 24px;
+            padding: 28px;
+            background: white;
+        }
+
+        .product-category {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .product-name {
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 12px;
-            min-height: 44px;
-        }
-
-        .product-price {
-            font-family: 'Space Mono', monospace;
-            font-size: 24px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
             font-weight: 700;
-            color: var(--accent);
+            margin-bottom: 12px;
+            color: var(--dark-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .contact {
-            display: inline-block;
-            padding: 16px 32px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .contact:hover {
-            background: #292524;
-            transform: scale(1.05);
-        }
-
-        /* Instrucciones para agregar imágenes */
-        .instructions {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 20px;
-            margin-bottom: 40px;
-            border-radius: 4px;
-        }
-
-        .instructions h3 {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: #92400e;
-        }
-
-        .instructions p {
+        .product-description {
             font-size: 14px;
-            color: #78350f;
+            color: var(--light-gray);
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
-        .instructions code {
-            background: #fed7aa;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
+        .product-price {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--orange);
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
         }
 
-        @media (max-width: 768px) {
-            h1 {
+        .product-price::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 3px;
+            background: var(--orange);
+            margin-right: 5px;
+        }
+
+        /* VIDEOS SECTION */
+        .videos-section {
+            background: var(--dark-gray);
+            color: white;
+        }
+
+        .videos-section .section-header h2 {
+            color: white;
+        }
+
+        .videos-section .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .video-card {
+            background: var(--medium-gray);
+            border: 2px solid rgba(255,107,0,0.3);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--orange);
+            box-shadow: 0 15px 40px rgba(255,107,0,0.3);
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 24px;
+            background: var(--medium-gray);
+        }
+
+        .video-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--dark-orange) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 20px,
+                rgba(0,0,0,0.05) 20px,
+                rgba(0,0,0,0.05) 40px
+            );
+            pointer-events: none;
+        }
+
+        .contact-section h2 {
+            color: white;
+        }
+
+        .contact-section p {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 22px 50px;
+            background: var(--yellow);
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+            border: 3px solid var(--dark-gray);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+            background: white;
+        }
+
+        .whatsapp-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black);
+            color: rgba(255,255,255,0.6);
+            padding: 50px 40px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer::before {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--orange);
+            margin: 0 auto 30px;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            nav, .carousel-controls, .carousel-arrow, .videos-section, 
+            .contact-section, footer, .no-print, .nav-top {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .hero {
+                height: auto;
+                margin-top: 0;
+                page-break-after: always;
+                background: white !important;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .carousel-slide {
+                color: black !important;
+            }
+
+            .carousel-slide h2 {
+                color: black !important;
+                text-shadow: none !important;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .product-card {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 2px solid #ddd;
+            }
+
+            .product-card::before,
+            .product-image::after {
+                display: none;
+            }
+
+            .product-card:hover {
+                transform: none;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-header h2 {
                 font-size: 32px;
             }
-            
-            .products {
+
+            .section-header::before {
+                display: none;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav .container {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .hero {
+                height: 500px;
+                margin-top: 110px;
+            }
+
+            .carousel-slide h2 {
+                font-size: 40px;
+            }
+
+            .carousel-slide p {
+                font-size: 16px;
+            }
+
+            .carousel-price {
+                font-size: 40px;
+                padding: 12px 30px;
+            }
+
+            .carousel-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            .carousel-arrow.prev {
+                left: 15px;
+            }
+
+            .carousel-arrow.next {
+                right: 15px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .videos-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Instrucciones -->
-        <div class="instructions">
-            <h3>📸 Cómo agregar tus imágenes:</h3>
-            <p>
-                1. Coloca tus imágenes en una carpeta llamada <code>images/</code> junto a este archivo HTML<br>
-                2. Nombra las imágenes como: <code>hidrolavadora.jpg</code>, <code>castillos.jpg</code>, <code>inflador.jpg</code>, etc.<br>
-                3. Las imágenes se mostrarán automáticamente. Si no tienes imágenes, se mostrarán los placeholders.
-            </p>
+    <!-- NAVIGATION -->
+    <nav class="no-print">
+        <div class="nav-top">
+            📦 ENTREGAS PERSONALIZADAS EN LIMACHE • PRODUCTOS SE ENTREGAN PROBADOS ✓
         </div>
+        <div class="container">
+            <div class="logo">HERRAMIENTAS</div>
+            <ul class="nav-links">
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <header>
-            <div class="logo">Logo</div>
-            <h1>Catálogo</h1>
-            <p class="subtitle">Productos de calidad para tu hogar</p>
-        </header>
-
-        <div class="products">
-            <!-- Producto 1 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/hidrolavadora.jpg" alt="Hidrolavadora inalámbrica" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🚿</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Hidrolavadora inalámbrica</h3>
-                    <p class="product-price">$20.000</p>
-                </div>
+    <!-- HERO CAROUSEL -->
+    <div class="hero">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <div class="tool-badge">🚿 Limpieza Profesional</div>
+                <h2>Hidrolavadora Inalámbrica</h2>
+                <p>Potencia industrial sin cables. Limpia autos, patios, fachadas y más con tecnología de última generación.</p>
+                <div class="carousel-price">$20.000</div>
             </div>
-
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/castillos.jpg" alt="Castillos para niñ@s" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🏰</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Castillos para niñ@s</h3>
-                    <p class="product-price">$10.000</p>
-                </div>
+            <div class="carousel-slide">
+                <div class="tool-badge">🍳 Para Eventos</div>
+                <h2>Disco de Cocimiento</h2>
+                <p>50 cms de diámetro profesional. Construcción robusta para asados y reuniones grandes.</p>
+                <div class="carousel-price">$45.000</div>
             </div>
-
-            <!-- Producto 3 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/inflador.jpg" alt="Inflador inalámbrico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">💨</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Inflador inalámbrico</h3>
-                    <p class="product-price">$20.000</p>
-                </div>
+            <div class="carousel-slide">
+                <div class="tool-badge">🔧 Herramienta Esencial</div>
+                <h2>Taladro Inalámbrico</h2>
+                <p>Potencia profesional, movilidad total. Perfecto para construcción, reparaciones y proyectos.</p>
+                <div class="carousel-price">$20.000</div>
             </div>
-
-            <!-- Producto 4 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/taladro.jpg" alt="Taladro inalámbrico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🔧</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Taladro inalámbrico</h3>
-                    <p class="product-price">$20.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 5 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/linterna.jpg" alt="Linterna solar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🔦</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Linterna solar con herramientas</h3>
-                    <p class="product-price">$12.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 6 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/focos.jpg" alt="Focos solares" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">💡</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Focos solares con sensor de movimiento</h3>
-                    <p class="product-price">3 x $10.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 7 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/disco.jpg" alt="Disco de cocimiento" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🍳</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Disco de cocimiento de 50 cms</h3>
-                    <p class="product-price">$45.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 8 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/esmeril.jpg" alt="Esmeril inalámbrico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">⚙️</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Esmeril inalámbrico</h3>
-                    <p class="product-price">$16.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 9 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/sierra.jpg" alt="Minisierra" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🪚</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Minisierra inalámbrica</h3>
-                    <p class="product-price">$20.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 10 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/cojin.jpg" alt="Cojín" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🛋️</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Cojín 26x36 cms</h3>
-                    <p class="product-price">$5.000</p>
-                </div>
-            </div>
-
-            <!-- Producto 11 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/cojines-personalizados.jpg" alt="Cojines personalizados" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="product-image-placeholder" style="display:none;">🎨</div>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Cojínes personalizados 15x25 cms</h3>
-                    <p class="product-price">$3.000</p>
-                </div>
+            <div class="carousel-slide">
+                <div class="tool-badge">🏰 Diversión Segura</div>
+                <h2>Castillos Inflables</h2>
+                <p>Entretenimiento garantizado para niños. Material resistente y diseño seguro.</p>
+                <div class="carousel-price">$10.000</div>
             </div>
         </div>
-
-        <footer>
-            <a href="https://wa.me/56963255923" class="contact" target="_blank">CONTACTAR +56963255923</a>
-        </footer>
+        <button class="carousel-arrow prev no-print" onclick="moveCarousel(-1)">‹</button>
+        <button class="carousel-arrow next no-print" onclick="moveCarousel(1)">›</button>
+        <div class="carousel-controls no-print">
+            <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+            <span class="carousel-dot" onclick="goToSlide(1)"></span>
+            <span class="carousel-dot" onclick="goToSlide(2)"></span>
+            <span class="carousel-dot" onclick="goToSlide(3)"></span>
+        </div>
     </div>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="productos">
+        <div class="section-header">
+            <h2>Catálogo de Productos</h2>
+            <div class="divider"></div>
+            <p>Herramientas y equipamiento de calidad profesional para todo tipo de trabajo</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/hidrolavadora.jpg" alt="Hidrolavadora" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🚿</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Hidrolavadora Inalámbrica</h3>
+                    <p class="product-description">Alta presión, portátil, ideal para limpieza de vehículos y superficies.</p>
+                    <div class="product-price">$20.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/castillos.jpg" alt="Castillos" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🏰</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Recreación</div>
+                    <h3 class="product-name">Castillos para Niñ@s</h3>
+                    <p class="product-description">Inflables resistentes para fiestas y eventos infantiles.</p>
+                    <div class="product-price">$10.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/inflador.jpg" alt="Inflador" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">💨</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Accesorios</div>
+                    <h3 class="product-name">Inflador Inalámbrico</h3>
+                    <p class="product-description">Compacto y potente. Para neumáticos, balones y más.</p>
+                    <div class="product-price">$20.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/taladro.jpg" alt="Taladro" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🔧</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Herramientas Eléctricas</div>
+                    <h3 class="product-name">Taladro Inalámbrico</h3>
+                    <p class="product-description">Potencia profesional. Incluye brocas y accesorios.</p>
+                    <div class="product-price">$20.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/linterna.jpg" alt="Linterna" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🔦</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Iluminación</div>
+                    <h3 class="product-name">Linterna Solar + Herramientas</h3>
+                    <p class="product-description">Energía solar, kit de herramientas integrado.</p>
+                    <div class="product-price">$12.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/focos.jpg" alt="Focos" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">💡</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Iluminación Exterior</div>
+                    <h3 class="product-name">Focos Solares con Sensor</h3>
+                    <p class="product-description">Detección automática de movimiento. Pack de 3 unidades.</p>
+                    <div class="product-price">3 x $10.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/disco.jpg" alt="Disco" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🍳</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Cocina</div>
+                    <h3 class="product-name">Disco de Cocimiento 50cm</h3>
+                    <p class="product-description">Acero de alta resistencia. Ideal para eventos grandes.</p>
+                    <div class="product-price">$45.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/esmeril.jpg" alt="Esmeril" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">⚙️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Herramientas de Corte</div>
+                    <h3 class="product-name">Esmeril Inalámbrico</h3>
+                    <p class="product-description">Corte y pulido profesional sin cables.</p>
+                    <div class="product-price">$16.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/sierra.jpg" alt="Sierra" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🪚</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Herramientas de Corte</div>
+                    <h3 class="product-name">Minisierra Inalámbrica</h3>
+                    <p class="product-description">Compacta, precisa y potente. Para múltiples materiales.</p>
+                    <div class="product-price">$20.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cojin.jpg" alt="Cojín" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🛋️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Hogar</div>
+                    <h3 class="product-name">Cojín 26x36 cms</h3>
+                    <p class="product-description">Confort y calidad. Varios diseños disponibles.</p>
+                    <div class="product-price">$5.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cojines-personalizados.jpg" alt="Cojines" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="product-placeholder" style="display:none;">🎨</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Hogar Personalizado</div>
+                    <h3 class="product-name">Cojínes Personalizados</h3>
+                    <p class="product-description">15x25 cms. Diseño según tu preferencia.</p>
+                    <div class="product-price">$3.000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEOS SECTION -->
+    <section id="videos" class="videos-section no-print">
+        <div class="section-header">
+            <h2>Demostraciones en Video</h2>
+            <div class="divider"></div>
+            <p>Mira nuestros productos en acción y aprende a sacarles el máximo provecho</p>
+        </div>
+
+        <div class="videos-grid">
+            <div class="video-card">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Demo Hidrolavadora</h3>
+                    <p class="video-description">Potencia de limpieza profesional en acción</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Herramientas Eléctricas</h3>
+                    <p class="video-description">Guía completa de taladro y esmeril</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Tips y Mantenimiento</h3>
+                    <p class="video-description">Cuida tus herramientas para mayor durabilidad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contacto" class="contact-section no-print">
+        <div class="section-header">
+            <h2>Solicita tu Presupuesto</h2>
+            <div class="divider"></div>
+            <p>Contáctanos por WhatsApp para consultas, pedidos y asesoría profesional</p>
+        </div>
+        <a href="https://wa.me/56963255923" class="contact-button" target="_blank">
+            <svg class="whatsapp-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Contactar Ahora
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="no-print">
+        <p><strong>HERRAMIENTAS PROFESIONALES</strong></p>
+        <p style="margin-top: 10px;">&copy; 2024 Catálogo de Herramientas. Calidad garantizada en todos nuestros productos.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let autoplayInterval;
+
+        function showSlide(n) {
+            if (n >= slides.length) currentSlide = 0;
+            if (n < 0) currentSlide = slides.length - 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+            resetAutoplay();
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+            resetAutoplay();
+        }
+
+        function autoplay() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(autoplay, 5000);
+        }
+
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+
+        startAutoplay();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+    </script>
 </body>
 </html>
