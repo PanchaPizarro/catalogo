@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Versión Final</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #fafaf9;
+            --text: #1c1917;
+            --accent: #0a0a0a;
+            --border: #e7e5e4;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #78716c;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #78716c;
+            font-weight: 300;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image-placeholder {
+            font-size: 60px;
+            opacity: 0.3;
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            min-height: 44px;
+        }
+
+        .product-price {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact {
+            display: inline-block;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact:hover {
+            background: #292524;
+            transform: scale(1.05);
+        }
+
+        /* Instrucciones para agregar imágenes */
+        .instructions {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+        }
+
+        .instructions h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #92400e;
+        }
+
+        .instructions p {
+            font-size: 14px;
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        .instructions code {
+            background: #fed7aa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Instrucciones -->
+        <div class="instructions">
+            <h3>📸 Cómo agregar tus imágenes:</h3>
+            <p>
+                1. Coloca tus imágenes en una carpeta llamada <code>images/</code> junto a este archivo HTML<br>
+                2. Nombra las imágenes como: <code>hidrolavadora.jpg</code>, <code>castillos.jpg</code>, <code>inflador.jpg</code>, etc.<br>
+                3. Las imágenes se mostrarán automáticamente. Si no tienes imágenes, se mostrarán los placeholders.
+            </p>
+        </div>
+
+        <header>
+            <div class="logo">Logo</div>
+            <h1>Catálogo</h1>
+            <p class="subtitle">Productos de calidad para tu hogar</p>
+        </header>
+
+        <div class="products">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/hidrolavadora.jpg" alt="Hidrolavadora inalámbrica" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🚿</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Hidrolavadora inalámbrica</h3>
+                    <p class="product-price">$20.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/castillos.jpg" alt="Castillos para niñ@s" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🏰</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Castillos para niñ@s</h3>
+                    <p class="product-price">$10.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/inflador.jpg" alt="Inflador inalámbrico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">💨</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Inflador inalámbrico</h3>
+                    <p class="product-price">$20.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/taladro.jpg" alt="Taladro inalámbrico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🔧</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Taladro inalámbrico</h3>
+                    <p class="product-price">$20.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/linterna.jpg" alt="Linterna solar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🔦</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Linterna solar con herramientas</h3>
+                    <p class="product-price">$12.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/focos.jpg" alt="Focos solares" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">💡</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Focos solares con sensor de movimiento</h3>
+                    <p class="product-price">3 x $10.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/disco.jpg" alt="Disco de cocimiento" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🍳</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Disco de cocimiento de 50 cms</h3>
+                    <p class="product-price">$45.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/esmeril.jpg" alt="Esmeril inalámbrico" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">⚙️</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Esmeril inalámbrico</h3>
+                    <p class="product-price">$16.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 9 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/sierra.jpg" alt="Minisierra" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🪚</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Minisierra inalámbrica</h3>
+                    <p class="product-price">$20.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 10 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cojin.jpg" alt="Cojín" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🛋️</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cojín 26x36 cms</h3>
+                    <p class="product-price">$5.000</p>
+                </div>
+            </div>
+
+            <!-- Producto 11 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cojines-personalizados.jpg" alt="Cojines personalizados" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="product-image-placeholder" style="display:none;">🎨</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cojínes personalizados 15x25 cms</h3>
+                    <p class="product-price">$3.000</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <a href="https://wa.me/56963255923" class="contact" target="_blank">CONTACTAR +56963255923</a>
+        </footer>
+    </div>
+</body>
+</html>
